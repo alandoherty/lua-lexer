@@ -8,7 +8,8 @@ Performance
 
 While primarily unfinished, the lexer can process the following code 1,000,000 times in 13ms:
 
-`-- globals.lua
+```lua
+-- globals.lua
 -- show all global variables
 
 local seen={}
@@ -30,6 +31,7 @@ function dump(t,i)
 	end
 end
 
-dump(_G,"")`
+dump(_G,"")
+```
 
 Code taken from the Lua Demo at http://www.lua.org/cgi-bin/demo?globals
