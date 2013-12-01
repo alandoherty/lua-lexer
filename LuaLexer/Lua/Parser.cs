@@ -40,13 +40,16 @@ namespace LuaParser
         /// <summary>
         /// Parse the tokens asynchronously
         /// </summary>
+        /// <param name="data">Lexer Data</param>
         /// <param name="callback">Asynchronous Callback</param>
-        public void ParseAsync(Action<ParserResult> callback)
+        public void ParseAsync(LexerResult data, Action<ParserResult> callback)
         {
             if (_threadRunning)
             { _thread.Abort(); }
 
             _asyncTokenParse = true;
+            _asyncData = callback;
+            _asyncData = data;
             _threadRunning = true;
             _callback = callback;
             _thread.Name = "Lua Parser";
@@ -56,13 +59,15 @@ namespace LuaParser
         /// <summary>
         /// Parse the Lua asynchronously
         /// </summary>
+        /// <param name="data">Lua Data</param>
         /// <param name="callback">Asynchronous Callback</param>
-        public void ParseLuaAsync(Action<ParserResult> callback)
+        public void ParseLuaAsync(String data, Action<ParserResult> callback)
         {
             if (_threadRunning)
             { _thread.Abort(); }
 
             _asyncTokenParse = false;
+            _asyncData = data;
             _threadRunning = true;
             _callback = callback;
             _thread.Name = "Lua Parser";

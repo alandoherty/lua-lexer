@@ -9,6 +9,7 @@ ehthumbs.db
 .Trashes
 Desktop.ini
 $RECYCLE.BIN/
+ParserTest/
 
 # File Extensions #
 ###################
@@ -36,6 +37,8 @@ $RECYCLE.BIN/
 *.zip
 *.user
 *.sln.docstates
+*.vsp
+*.psess
 
 # Builds #
 ###################
