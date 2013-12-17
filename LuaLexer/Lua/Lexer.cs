@@ -12,6 +12,7 @@ namespace LuaParser
         private Thread _thread;
         private Action<LexerResult> _callback;
         private bool _threadRunning = false;
+        private static Regex endOfLineRegex = new Regex(@"\r\n|\r|\n", RegexOptions.Compiled);
         #endregion
 
         #region Properties
@@ -63,6 +64,14 @@ namespace LuaParser
                     }
                     else
                     {
+						string value = _asm.Substring(curPos, matchLen);
+						Match eolMatch = endOfLineRegex.Match(value);
+						if (eolMatch.Success) {
+							curLine = curLine + 1;
+						} else {
+							curCol = 0;
+						}
+						
                         tokens.Add(new Token(match.Type, matchVal, new TokenLocation(
                             curCol,
                             curPos,
